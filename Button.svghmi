@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Button" name="button" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="Pressed_BorderColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="Pressed_BorderSize" type="number" default="3" />
+        <hmi:paramDef name="Pressed_Radius" type="number" default="25" />
+        <hmi:paramDef name="Pressed_Text" type="string" default="STOP" />
+        <hmi:paramDef name="Pressed_TextSize" type="number" default="20" />
+        <hmi:paramDef name="Pressed_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0x129C40" />
+        <hmi:paramDef name="Released_BorderColor" type="HmiColor" default="0x129C40" />
+        <hmi:paramDef name="Released_BorderSize" type="number" default="3" />
+        <hmi:paramDef name="Released_Radius" type="number" default="25" />
+        <hmi:paramDef name="Released_Text" type="string" default="START" />
+        <hmi:paramDef name="Released_TextSize" type="number" default="20" />
+        <hmi:paramDef name="Released_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        <hmi:localDef name="BorderColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BorderColor : ParamProps.Released_BorderColor }}" />
+        <hmi:localDef name="BorderSize" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BorderSize : ParamProps.Released_BorderSize }}" />
+        <hmi:localDef name="Radius" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_Radius : ParamProps.Released_Radius }}" />
+        <hmi:localDef name="Text" type="string" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_Text : ParamProps.Released_Text }}" />
+        <hmi:localDef name="TextSize" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_TextSize : ParamProps.Released_TextSize }}" />
+        <hmi:localDef name="TextColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_TextColor : ParamProps.Released_TextColor }}" />
+
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)">
+        <rect width="100%" height="100%"
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BorderColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }"/>
+        <rect hmi-bind:width="{{ (HmiProps.Width - LocalProps.BorderSize * 2) }}"
+	        hmi-bind:height="{{ (HmiProps.Height - LocalProps.BorderSize * 2) }}" 
+	        hmi-bind:x="{ LocalProps.BorderSize }" 
+	        hmi-bind:y="{ LocalProps.BorderSize }" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }" />
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central"
+            hmi-bind:font-size="{ LocalProps.TextSize }" font-family="Arial, Helvetica, sans-serif" font-weight="bold" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.TextColor) }}" >
+            <hmi:text hmi-bind:value="{ LocalProps.Text }" />
+        </text>
+    </g>
+</svg>

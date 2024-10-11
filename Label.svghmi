@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Label" name="label" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="IsActive" type="boolean" default="false" />
+        <hmi:paramDef name="Active_BackgroundColor" type="HmiColor" default="0x00129C40" />
+        <hmi:paramDef name="Active_BorderColor" type="HmiColor" default="0x00129C40" />
+        <hmi:paramDef name="Active_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="Active_Radius" type="number" default="5" />
+        <hmi:paramDef name="Active_Text" type="string" default="RUNNING" />
+        <hmi:paramDef name="Active_TextSize" type="number" default="20" />
+        <hmi:paramDef name="Active_TextColor" type="HmiColor" default="0x00FFFFFF" />
+        <hmi:paramDef name="Inactive_BackgroundColor" type="HmiColor" default="0xFF000000" />
+        <hmi:paramDef name="Inactive_BorderColor" type="HmiColor" default="0xFF000000" />
+        <hmi:paramDef name="Inactive_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="Inactive_Radius" type="number" default="5" />
+        <hmi:paramDef name="Inactive_Text" type="string" default="RUNNING" />
+        <hmi:paramDef name="Inactive_TextSize" type="number" default="20" />
+        <hmi:paramDef name="Inactive_TextColor" type="HmiColor" default="0x00000000" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_BackgroundColor : ParamProps.Inactive_BackgroundColor }}" />
+        <hmi:localDef name="BorderColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_BorderColor : ParamProps.Inactive_BorderColor }}" />
+        <hmi:localDef name="BorderSize" type="number" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_BorderSize : ParamProps.Inactive_BorderSize }}" />
+        <hmi:localDef name="Radius" type="number" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_Radius : ParamProps.Inactive_Radius }}" />
+        <hmi:localDef name="Text" type="string" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_Text : ParamProps.Inactive_Text }}" />
+        <hmi:localDef name="TextSize" type="number" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_TextSize : ParamProps.Inactive_TextSize }}" />
+        <hmi:localDef name="TextColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsActive ? ParamProps.Active_TextColor : ParamProps.Inactive_TextColor }}" />
+    </defs>
+
+    <g>
+        <rect width="100%" height="100%"
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BorderColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }"/>
+        <rect hmi-bind:width="{{ (HmiProps.Width - LocalProps.BorderSize * 2) }}"
+	        hmi-bind:height="{{ (HmiProps.Height - LocalProps.BorderSize * 2) }}" 
+	        hmi-bind:x="{ LocalProps.BorderSize }" 
+	        hmi-bind:y="{ LocalProps.BorderSize }" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }" />
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central"
+            hmi-bind:font-size="{ LocalProps.TextSize }" font-family="Arial, Helvetica, sans-serif" font-weight="bold" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.TextColor) }}" >
+            <hmi:text hmi-bind:value="{ LocalProps.Text }" />
+        </text>
+    </g>
+</svg>
