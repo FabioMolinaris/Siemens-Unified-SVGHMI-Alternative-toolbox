@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Label" name="label" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="IsLL" type="boolean" default="false" />
+        <hmi:paramDef name="IsL" type="boolean" default="false" />
+        <hmi:paramDef name="IsH" type="boolean" default="false" />
+        <hmi:paramDef name="IsHH" type="boolean" default="false" />
+        <hmi:paramDef name="LL_BackgroundColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="LL_BorderColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="LL_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="LL_Radius" type="number" default="5" />
+        <hmi:paramDef name="LL_Text" type="string" default="LL" />
+        <hmi:paramDef name="LL_TextSize" type="number" default="20" />
+        <hmi:paramDef name="LL_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="L_BackgroundColor" type="HmiColor" default="0xFFFFBA00" />
+        <hmi:paramDef name="L_BorderColor" type="HmiColor" default="0xFFFFBA00" />
+        <hmi:paramDef name="L_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="L_Radius" type="number" default="5" />
+        <hmi:paramDef name="L_Text" type="string" default="L" />
+        <hmi:paramDef name="L_TextSize" type="number" default="20" />
+        <hmi:paramDef name="L_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="H_BackgroundColor" type="HmiColor" default="0xFFFFBA00" />
+        <hmi:paramDef name="H_BorderColor" type="HmiColor" default="0xFFFFBA00" />
+        <hmi:paramDef name="H_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="H_Radius" type="number" default="5" />
+        <hmi:paramDef name="H_Text" type="string" default="H" />
+        <hmi:paramDef name="H_TextSize" type="number" default="20" />
+        <hmi:paramDef name="H_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="HH_BackgroundColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="HH_BorderColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="HH_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="HH_Radius" type="number" default="5" />
+        <hmi:paramDef name="HH_Text" type="string" default="HH" />
+        <hmi:paramDef name="HH_TextSize" type="number" default="20" />
+        <hmi:paramDef name="HH_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="OK_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="OK_BorderColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="OK_BorderSize" type="number" default="0" />
+        <hmi:paramDef name="OK_Radius" type="number" default="5" />
+        <hmi:paramDef name="OK_Text" type="string" default="OK" />
+        <hmi:paramDef name="OK_TextSize" type="number" default="20" />
+        <hmi:paramDef name="OK_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_BackgroundColor : 
+            (ParamProps.IsHH ? ParamProps.HH_BackgroundColor : 
+            (ParamProps.IsL ? ParamProps.L_BackgroundColor : 
+            (ParamProps.IsH ? ParamProps.H_BackgroundColor : ParamProps.OK_BackgroundColor))) }}" />
+        <hmi:localDef name="BorderColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_BorderColor : 
+            (ParamProps.IsHH ? ParamProps.HH_BorderColor : 
+            (ParamProps.IsL ? ParamProps.L_BorderColor : 
+            (ParamProps.IsH ? ParamProps.H_BorderColor : ParamProps.OK_BorderColor))) }}" />
+        <hmi:localDef name="BorderSize" type="number" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_BorderSize : 
+            (ParamProps.IsHH ? ParamProps.HH_BorderSize : 
+            (ParamProps.IsL ? ParamProps.L_BorderSize : 
+            (ParamProps.IsH ? ParamProps.H_BorderSize : ParamProps.OK_BorderSize))) }}" />
+        <hmi:localDef name="Radius" type="number" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_Radius : 
+            (ParamProps.IsHH ? ParamProps.HH_Radius : 
+            (ParamProps.IsL ? ParamProps.L_Radius : 
+            (ParamProps.IsH ? ParamProps.H_Radius : ParamProps.OK_Radius))) }}" />
+        <hmi:localDef name="Text" type="string" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_Text : 
+            (ParamProps.IsHH ? ParamProps.HH_Text : 
+            (ParamProps.IsL ? ParamProps.L_Text : 
+            (ParamProps.IsH ? ParamProps.H_Text : ParamProps.OK_Text))) }}" />
+        <hmi:localDef name="TextSize" type="number" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_TextSize : 
+            (ParamProps.IsHH ? ParamProps.HH_TextSize : 
+            (ParamProps.IsL ? ParamProps.L_TextSize : 
+            (ParamProps.IsH ? ParamProps.H_TextSize : ParamProps.OK_TextSize))) }}" />
+        <hmi:localDef name="TextColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsLL ? ParamProps.LL_TextColor : 
+            (ParamProps.IsHH ? ParamProps.HH_TextColor : 
+            (ParamProps.IsL ? ParamProps.L_TextColor : 
+            (ParamProps.IsH ? ParamProps.H_TextColor : ParamProps.OK_TextColor))) }}" />
+    
+    </defs>
+
+    <g>
+        <rect width="100%" height="100%"
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BorderColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }"/>
+        <rect hmi-bind:width="{{ (HmiProps.Width - LocalProps.BorderSize * 2) }}"
+	        hmi-bind:height="{{ (HmiProps.Height - LocalProps.BorderSize * 2) }}" 
+	        hmi-bind:x="{ LocalProps.BorderSize }" 
+	        hmi-bind:y="{ LocalProps.BorderSize }" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"
+            hmi-bind:rx="{ LocalProps.Radius }" />
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central"
+            hmi-bind:font-size="{ LocalProps.TextSize }" font-family="Arial, Helvetica, sans-serif" font-weight="bold" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.TextColor) }}" >
+            <hmi:text hmi-bind:value="{ LocalProps.Text }" />
+        </text>
+    </g>
+</svg>
