@@ -6,20 +6,20 @@
 
     <hmi:self type="widget" displayName="Label" name="label" version="1.0.0" performanceClass="L">
         <hmi:paramDef name="IsActive" type="boolean" default="false" />
-        <hmi:paramDef name="Active_BackgroundColor" type="HmiColor" default="0x00129C40" />
-        <hmi:paramDef name="Active_BorderColor" type="HmiColor" default="0x00129C40" />
+        <hmi:paramDef name="Active_BackgroundColor" type="HmiColor" default="0xFF129C40" />
+        <hmi:paramDef name="Active_BorderColor" type="HmiColor" default="0xFF129C40" />
         <hmi:paramDef name="Active_BorderSize" type="number" default="0" />
         <hmi:paramDef name="Active_Radius" type="number" default="5" />
         <hmi:paramDef name="Active_Text" type="string" default="RUNNING" />
         <hmi:paramDef name="Active_TextSize" type="number" default="20" />
-        <hmi:paramDef name="Active_TextColor" type="HmiColor" default="0x00FFFFFF" />
-        <hmi:paramDef name="Inactive_BackgroundColor" type="HmiColor" default="0xFF000000" />
-        <hmi:paramDef name="Inactive_BorderColor" type="HmiColor" default="0xFF000000" />
+        <hmi:paramDef name="Active_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="Inactive_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="Inactive_BorderColor" type="HmiColor" default="0xFFCFCFCF" />
         <hmi:paramDef name="Inactive_BorderSize" type="number" default="0" />
         <hmi:paramDef name="Inactive_Radius" type="number" default="5" />
         <hmi:paramDef name="Inactive_Text" type="string" default="RUNNING" />
         <hmi:paramDef name="Inactive_TextSize" type="number" default="20" />
-        <hmi:paramDef name="Inactive_TextColor" type="HmiColor" default="0x00000000" />
+        <hmi:paramDef name="Inactive_TextColor" type="HmiColor" default="0xFFFFFFFF" />
     </hmi:self>
 
     <defs>
