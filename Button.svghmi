@@ -6,16 +6,16 @@
 
     <hmi:self type="widget" displayName="Button" name="button" version="1.0.0" performanceClass="L">
         <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
-        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFFC70000" />
-        <hmi:paramDef name="Pressed_BorderColor" type="HmiColor" default="0xFFC70000" />
-        <hmi:paramDef name="Pressed_BorderSize" type="number" default="3" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="Pressed_BorderColor" type="HmiColor" default="0xFF808080" />
+        <hmi:paramDef name="Pressed_BorderSize" type="number" default="5" />
         <hmi:paramDef name="Pressed_Radius" type="number" default="25" />
         <hmi:paramDef name="Pressed_Text" type="string" default="STOP" />
         <hmi:paramDef name="Pressed_TextSize" type="number" default="20" />
         <hmi:paramDef name="Pressed_TextColor" type="HmiColor" default="0xFFFFFFFF" />
-        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0x129C40" />
-        <hmi:paramDef name="Released_BorderColor" type="HmiColor" default="0x129C40" />
-        <hmi:paramDef name="Released_BorderSize" type="number" default="3" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="Released_BorderColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="Released_BorderSize" type="number" default="5" />
         <hmi:paramDef name="Released_Radius" type="number" default="25" />
         <hmi:paramDef name="Released_Text" type="string" default="START" />
         <hmi:paramDef name="Released_TextSize" type="number" default="20" />
