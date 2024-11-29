@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Switch" name="switch" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="IsToggledON" type="boolean" default="false" />
+        <hmi:paramDef name="ToggledOFF_BackgroundColor" type="HmiColor" default="0xFFF28C00" />
+        <hmi:paramDef name="ToggledON_BackgroundColor" type="HmiColor" default="0xFF129C40" />
+        <hmi:paramDef name="ToggleColor" type="HmiColor" default="0xFFFFFFFF" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsToggledON ? ParamProps.ToggledON_BackgroundColor : ParamProps.ToggledOFF_BackgroundColor }}" />
+        <hmi:localDef name="LeftPosition" type="number" hmi-bind:value="{{ ParamProps.IsToggledON ? (HmiProps.Width - HmiProps.Height) : (HmiProps.Height - (HmiProps.Height * 0.9)) }}" />
+        <hmi:localDef name="CircleWidth" type="number" hmi-bind:value="{{ (HmiProps.Height * 0.9) }}" />
+    </defs>
+
+  <g>
+    <rect hmi-bind:width="{ HmiProps.Width }" hmi-bind:height="{ HmiProps.Height }" ry="50%" 
+        hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"/>
+    <rect hmi-bind:width="{ LocalProps.CircleWidth }" hmi-bind:height="{ LocalProps.CircleWidth }" ry="45%" 
+        hmi-bind:x="{ LocalProps.LeftPosition }" y="5%" hmi-bind:fill="{{ Converter.RGBA(ParamProps.ToggleColor) }}"/>
+  </g>
+</svg>
