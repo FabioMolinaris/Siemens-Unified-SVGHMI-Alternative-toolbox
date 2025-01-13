@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    width="60" height="60" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFF699F4C" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFF699F4C" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <path d="M12.6128994,2.20970461 L12.7071068,2.29289322 L15.415,5 L18,5 C18.5128358,5 18.9355072,5.38604019 18.9932723,5.88337887 L19,6 L19,8.585 L21.7071068,11.2928932 C22.0675907,11.6533772 22.0953203,12.2206082 21.7902954,12.6128994 L21.7071068,12.7071068 L19,15.414 L19,18 C19,18.5128358 18.6139598,18.9355072 18.1166211,18.9932723 L18,19 L15.414,19 L12.7071068,21.7071068 C12.3466228,22.0675907 11.7793918,22.0953203 11.3871006,21.7902954 L11.2928932,21.7071068 L8.585,19 L6,19 C5.48716416,19 5.06449284,18.6139598 5.00672773,18.1166211 L5,18 L5,15.415 L2.29289322,12.7071068 C1.93240926,12.3466228 1.90467972,11.7793918 2.20970461,11.3871006 L2.29289322,11.2928932 L5,8.584 L5,6 C5,5.48716416 5.38604019,5.06449284 5.88337887,5.00672773 L6,5 L8.584,5 L11.2928932,2.29289322 C11.6533772,1.93240926 12.2206082,1.90467972 12.6128994,2.20970461 Z M12.8554278,6.48102784 C12.4738881,5.84163692 11.5331237,5.8396635 11.148132,6.47510756 L11.0861885,6.59386153 L7.08618845,15.5938615 L7.044972,15.7031637 C6.90724713,16.1443339 7.09216585,16.6251226 7.49002419,16.8602993 L7.59386153,16.9138115 L7.70316366,16.955028 C8.14433393,17.0927529 8.62512261,16.9078341 8.86029935,16.5099758 L8.91381155,16.4061385 L9.53875043,15 L14.4607504,15 L15.0861885,16.4061385 L15.1397007,16.5099758 C15.3944754,16.940989 15.9375032,17.1220939 16.4061385,16.9138115 C16.8747738,16.7055292 17.1042299,16.1810981 16.955028,15.7031637 L16.9138115,15.5938615 L12.9138115,6.59386153 L12.8554278,6.48102784 Z M12,9.461 L13.5727504,13 L10.4267504,13 L12,9.461 Z"
+        hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+</svg>

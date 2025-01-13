@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    width="60" height="60" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFF699F4C" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFF699F4C" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <path d="M1080,270a30,30,0,1,1,30-30A30,30,0,0,1,1080,270Zm14-34h-10V226a4,4,0,0,0-8,0v10h-10a4,4,0,0,0,0,8h10v10a4,4,0,0,0,8,0V244h10A4,4,0,0,0,1094,236Z" 
+        transform="translate(-1050 -210)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+</svg>

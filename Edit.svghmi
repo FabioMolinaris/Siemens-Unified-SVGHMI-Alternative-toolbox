@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    width="60" height="60" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor_1" type="HmiColor" default="0xFF9F4C4C" />
+        <hmi:paramDef name="Released_BackgroundColor_1" type="HmiColor" default="0xFF9F4C4C" />
+        <hmi:paramDef name="Pressed_BackgroundColor_2" type="HmiColor" default="0xFF65727F" />
+        <hmi:paramDef name="Released_BackgroundColor_2" type="HmiColor" default="0xFF65727F" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor_1" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor_1 : ParamProps.Released_BackgroundColor_1 }}" />
+        <hmi:localDef name="BackgroundColor_2" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor_2 : ParamProps.Released_BackgroundColor_2 }}" />
+        
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <path d="M400.018,116L372.086,144.06a4.029,4.029,0,0,1-1.793,1.04l-7.235,1.974-10.13-10.132,1.974-7.235a4.088,4.088,0,0,1,.4-0.965,4,4,0,0,1,.638-0.828L384.01,99.988Z" 
+        transform="translate(-350 -90)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_1) }}" fill-rule="evenodd"/>
+    <path d="M408.819,107.324L404.02,112,388.012,95.986l4.663-4.807a4.036,4.036,0,0,1,5.708,0l10.436,10.437A4.029,4.029,0,0,1,408.819,107.324Zm-56.282,42.62a2.016,2.016,0,0,1-2.477-2.479l1.582-5.806,6.7,6.7Z"
+        transform="translate(-350 -90)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_2) }}" fill-rule="evenodd"/>
+</svg>

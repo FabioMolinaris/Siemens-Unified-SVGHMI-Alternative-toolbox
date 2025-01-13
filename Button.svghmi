@@ -6,6 +6,7 @@
 
     <hmi:self type="widget" displayName="Button" name="button" version="1.0.0" performanceClass="L">
         <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Feedback" type="boolean" default="false" />
         <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
         <hmi:paramDef name="Pressed_BorderColor" type="HmiColor" default="0xFF808080" />
         <hmi:paramDef name="Pressed_BorderSize" type="number" default="5" />
@@ -20,17 +21,24 @@
         <hmi:paramDef name="Released_Text" type="string" default="START" />
         <hmi:paramDef name="Released_TextSize" type="number" default="20" />
         <hmi:paramDef name="Released_TextColor" type="HmiColor" default="0xFFFFFFFF" />
+        <hmi:paramDef name="Feedback_BackgroundColor" type="HmiColor" default="0xFFCFCFCF" />
+        <hmi:paramDef name="Feedback_BorderColor" type="HmiColor" default="0xFF808080" />
+        <hmi:paramDef name="Feedback_BorderSize" type="number" default="5" />
+        <hmi:paramDef name="Feedback_Radius" type="number" default="25" />
+        <hmi:paramDef name="Feedback_Text" type="string" default="STARTED" />
+        <hmi:paramDef name="Feedback_TextSize" type="number" default="20" />
+        <hmi:paramDef name="Feedback_TextColor" type="HmiColor" default="0xFFFFFFFF" />
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
-        <hmi:localDef name="BorderColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BorderColor : ParamProps.Released_BorderColor }}" />
-        <hmi:localDef name="BorderSize" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BorderSize : ParamProps.Released_BorderSize }}" />
-        <hmi:localDef name="Radius" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_Radius : ParamProps.Released_Radius }}" />
-        <hmi:localDef name="Text" type="string" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_Text : ParamProps.Released_Text }}" />
-        <hmi:localDef name="TextSize" type="number" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_TextSize : ParamProps.Released_TextSize }}" />
-        <hmi:localDef name="TextColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_TextColor : ParamProps.Released_TextColor }}" />
-
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor : ParamProps.Feedback ? ParamProps.Feedback_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        <hmi:localDef name="BorderColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BorderColor : ParamProps.Feedback ? ParamProps.Feedback_BorderColor : ParamProps.Released_BorderColor }}" />
+        <hmi:localDef name="BorderSize" type="number" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BorderSize : ParamProps.Feedback ? ParamProps.Feedback_BorderSize : ParamProps.Released_BorderSize }}" />
+        <hmi:localDef name="Radius" type="number" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_Radius : ParamProps.Feedback ? ParamProps.Feedback_Radius : ParamProps.Released_Radius }}" />
+        <hmi:localDef name="Text" type="string" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_Text : ParamProps.Feedback ? ParamProps.Feedback_Text : ParamProps.Released_Text }}" />
+        <hmi:localDef name="TextSize" type="number" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_TextSize : ParamProps.Feedback ? ParamProps.Feedback_TextSize : ParamProps.Released_TextSize }}" />
+        <hmi:localDef name="TextColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_TextColor : ParamProps.Feedback ? ParamProps.Feedback_TextColor : ParamProps.Released_TextColor }}" />
+        
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
         </hmi:action>

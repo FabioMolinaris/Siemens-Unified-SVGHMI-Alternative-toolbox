@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    width="60" height="60" viewBox="0 0 37.5 37.5" preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFFB4B4B4" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFFB4B4B4" />
+        <hmi:paramDef name="IsAlarmActive" type="boolean" default="false" />
+        <hmi:paramDef name="InAlarmColor" type="HmiColor" default="0xFFC70000" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsAlarmActive ? ParamProps.InAlarmColor :
+            (ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor) }}" />
+        
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <path d="M10.286,12.036,6.482,8.25,9,5.732l3.786,3.8-2.5,2.5M22.786,1.5V6.857H19.214V1.5h3.571M35.518,8.25l-3.8,3.786-2.5-2.5L33,5.732,35.518,8.25M7.607,18.464v3.571H2.25V18.464H7.607m26.786,0H39.75v3.571H34.393V18.464M10.286,35.429H31.714A3.571,3.571,0,0,1,35.286,39H6.714a3.571,3.571,0,0,1,3.571-3.571M21,8.643A10.714,10.714,0,0,1,31.714,19.357V33.643H10.286V19.357A10.714,10.714,0,0,1,21,8.643Z" 
+        transform="translate(-2.25 -1.5)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+</svg>

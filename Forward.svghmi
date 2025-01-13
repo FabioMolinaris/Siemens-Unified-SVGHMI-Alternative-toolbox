@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    width="60" height="60" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
+        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFF8B695C" />
+        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFF8B695C" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <path d="M1080,810a30,30,0,1,1-30,30A30,30,0,0,1,1080,810Zm-15.99,38.742a1.216,1.216,0,0,0,.77,1.1,1.459,1.459,0,0,0,1.47-.082l13.14-8.683a1.385,1.385,0,0,0,.63-1.157,1.362,1.362,0,0,0-.64-1.154l-13.17-8.55a1.455,1.455,0,0,0-1.47-.068,1.283,1.283,0,0,0-.76,1.165Zm18,0a1.216,1.216,0,0,0,.77,1.1,1.459,1.459,0,0,0,1.47-.082l13.14-8.683a1.385,1.385,0,0,0,.63-1.157,1.362,1.362,0,0,0-.64-1.154l-13.17-8.55a1.455,1.455,0,0,0-1.47-.068,1.283,1.283,0,0,0-.76,1.165Z" 
+        transform="translate(-1050 -810)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+</svg>
