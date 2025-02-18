@@ -11,7 +11,7 @@
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
         
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
@@ -19,8 +19,13 @@
         <hmi:action id="onMouseUp" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
         </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
     </defs>
 
-    <path d="M380,930a30,30,0,1,1-30,30A30,30,0,0,1,380,930Zm-8.5,20h17a1.59,1.59,0,0,1,1.5,1.667v16.666A1.59,1.59,0,0,1,388.5,970h-17a1.59,1.59,0,0,1-1.5-1.667V951.667A1.59,1.59,0,0,1,371.5,950Z" 
-        transform="translate(-350 -930)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <path d="M380,930a30,30,0,1,1-30,30A30,30,0,0,1,380,930Zm-8.5,20h17a1.59,1.59,0,0,1,1.5,1.667v16.666A1.59,1.59,0,0,1,388.5,970h-17a1.59,1.59,0,0,1-1.5-1.667V951.667A1.59,1.59,0,0,1,371.5,950Z" 
+            transform="translate(-350 -930)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+    </g>
 </svg>

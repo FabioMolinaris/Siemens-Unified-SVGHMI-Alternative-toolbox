@@ -13,14 +13,14 @@
 
     <defs>
         <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.IsToggledON ? ParamProps.ToggledON_BackgroundColor : ParamProps.ToggledOFF_BackgroundColor }}" />
-        <hmi:localDef name="LeftPosition" type="number" hmi-bind:value="{{ ParamProps.IsToggledON ? (HmiProps.Width - HmiProps.Height) : (HmiProps.Height - (HmiProps.Height * 0.9)) }}" />
+        <hmi:localDef name="LeftPosition" type="number" hmi-bind:value="{{ ParamProps.IsToggledON ? (HmiProps.Width - HmiProps.Height) + ((HmiProps.Height - (HmiProps.Height * 0.9)) / 2) : (HmiProps.Height - (HmiProps.Height * 0.9)) / 2 }}" />
         <hmi:localDef name="CircleWidth" type="number" hmi-bind:value="{{ (HmiProps.Height * 0.9) }}" />
     </defs>
 
-  <g>
-    <rect hmi-bind:width="{ HmiProps.Width }" hmi-bind:height="{ HmiProps.Height }" ry="50%" 
-        hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"/>
-    <rect hmi-bind:width="{ LocalProps.CircleWidth }" hmi-bind:height="{ LocalProps.CircleWidth }" ry="45%" 
-        hmi-bind:x="{ LocalProps.LeftPosition }" y="5%" hmi-bind:fill="{{ Converter.RGBA(ParamProps.ToggleColor) }}"/>
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <rect hmi-bind:width="{ HmiProps.Width }" hmi-bind:height="{ HmiProps.Height }" ry="50%" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"/>
+        <rect hmi-bind:width="{ LocalProps.CircleWidth }" hmi-bind:height="{ LocalProps.CircleWidth }" ry="45%" 
+            hmi-bind:x="{ LocalProps.LeftPosition }" y="5%" hmi-bind:fill="{{ Converter.RGBA(ParamProps.ToggleColor) }}"/>
   </g>
 </svg>

@@ -45,10 +45,13 @@
         <hmi:action id="onMouseUp" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
         </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
     </defs>
 
-    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)">
-        <rect width="100%" height="100%"
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <rect pointer-events="all" width="100%" height="100%"
             hmi-bind:fill="{{ Converter.RGBA(LocalProps.BorderColor) }}"
             hmi-bind:rx="{ LocalProps.Radius }"/>
         <rect hmi-bind:width="{{ (HmiProps.Width - LocalProps.BorderSize * 2) }}"

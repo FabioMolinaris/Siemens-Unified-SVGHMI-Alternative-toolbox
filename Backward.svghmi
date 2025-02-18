@@ -11,7 +11,7 @@
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
         
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
@@ -19,8 +19,13 @@
         <hmi:action id="onMouseUp" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
         </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
     </defs>
 
-    <path d="M940,810a30,30,0,1,1-30,30A30,30,0,0,1,940,810Zm15.986,38.742a1.209,1.209,0,0,1-.764,1.1,1.465,1.465,0,0,1-1.473-.082l-13.14-8.683a1.371,1.371,0,0,1,.009-2.311l13.176-8.55a1.454,1.454,0,0,1,1.47-.068,1.288,1.288,0,0,1,.755,1.165Zm-18,0a1.209,1.209,0,0,1-.764,1.1,1.465,1.465,0,0,1-1.473-.082l-13.14-8.683a1.371,1.371,0,0,1,.009-2.311l13.176-8.55a1.454,1.454,0,0,1,1.47-.068,1.288,1.288,0,0,1,.755,1.165Z"
-        transform="translate(-910 -810)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <path d="M940,810a30,30,0,1,1-30,30A30,30,0,0,1,940,810Zm15.986,38.742a1.209,1.209,0,0,1-.764,1.1,1.465,1.465,0,0,1-1.473-.082l-13.14-8.683a1.371,1.371,0,0,1,.009-2.311l13.176-8.55a1.454,1.454,0,0,1,1.47-.068,1.288,1.288,0,0,1,.755,1.165Zm-18,0a1.209,1.209,0,0,1-.764,1.1,1.465,1.465,0,0,1-1.473-.082l-13.14-8.683a1.371,1.371,0,0,1,.009-2.311l13.176-8.55a1.454,1.454,0,0,1,1.47-.068,1.288,1.288,0,0,1,.755,1.165Z"
+            transform="translate(-910 -810)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+    </g>
 </svg>

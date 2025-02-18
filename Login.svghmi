@@ -8,8 +8,22 @@
         <hmi:paramDef name="IsLoggedIn" type="boolean" default="false" />
     </hmi:self>
 
-    <path id="lock" d="M644,356h32a4,4,0,0,1,4,4v26a4,4,0,0,1-4,4H644a4,4,0,0,1-4-4V360A4,4,0,0,1,644,356Zm18,17.445V378a2,2,0,0,1-4,0v-4.555A4,4,0,1,1,662,373.445ZM670,352v-6a10,10,0,0,0-20,0v6h-6v-6a16,16,0,0,1,32,0v6h-6Z" 
-        transform="translate(-630 -330)" hmi-bind:visibility="{{ ParamProps.IsLoggedIn ? 'hidden' : 'visible' }}" hmi-bind:fill="{{ Converter.RGBA(0xFF9F4C4C) }}" fill-rule="evenodd"/>
-    <path id="unlock" d="M794,356h32a4,4,0,0,1,4,4v26a4,4,0,0,1-4,4H794a4,4,0,0,1-4-4V360A4,4,0,0,1,794,356Zm18,17.445V378a2,2,0,0,1-4,0v-4.555A4,4,0,1,1,812,373.445ZM796,352v-6a10,10,0,0,0-20,0v6h-6v-6a16,16,0,0,1,32,0v6h-6Z" 
-        transform="translate(-770 -330)" hmi-bind:visibility="{{ ParamProps.IsLoggedIn ? 'visible' : 'hidden' }}" hmi-bind:fill="{{ Converter.RGBA(0xFF699F4C) }}" fill-rule="evenodd"/>
+    <defs>
+        <hmi:action id="onMouseDown" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
+        </hmi:action>
+        <hmi:action id="onMouseUp" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
+    </defs>
+
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <path id="lock" d="M644,356h32a4,4,0,0,1,4,4v26a4,4,0,0,1-4,4H644a4,4,0,0,1-4-4V360A4,4,0,0,1,644,356Zm18,17.445V378a2,2,0,0,1-4,0v-4.555A4,4,0,1,1,662,373.445ZM670,352v-6a10,10,0,0,0-20,0v6h-6v-6a16,16,0,0,1,32,0v6h-6Z" 
+            transform="translate(-630 -330)" hmi-bind:visibility="{{ ParamProps.IsLoggedIn ? 'hidden' : 'visible' }}" hmi-bind:fill="{{ Converter.RGBA(0xFF9F4C4C) }}" fill-rule="evenodd"/>
+        <path id="unlock" d="M794,356h32a4,4,0,0,1,4,4v26a4,4,0,0,1-4,4H794a4,4,0,0,1-4-4V360A4,4,0,0,1,794,356Zm18,17.445V378a2,2,0,0,1-4,0v-4.555A4,4,0,1,1,812,373.445ZM796,352v-6a10,10,0,0,0-20,0v6h-6v-6a16,16,0,0,1,32,0v6h-6Z" 
+            transform="translate(-770 -330)" hmi-bind:visibility="{{ ParamProps.IsLoggedIn ? 'visible' : 'hidden' }}" hmi-bind:fill="{{ Converter.RGBA(0xFF699F4C) }}" fill-rule="evenodd"/>
+    </g>
 </svg>

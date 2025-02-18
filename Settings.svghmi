@@ -13,8 +13,8 @@
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor_1" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor_1 : ParamProps.Released_BackgroundColor_1 }}" />
-        <hmi:localDef name="BackgroundColor_2" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor_2 : ParamProps.Released_BackgroundColor_2 }}" />
+        <hmi:localDef name="BackgroundColor_1" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor_1 : ParamProps.Released_BackgroundColor_1 }}" />
+        <hmi:localDef name="BackgroundColor_2" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor_2 : ParamProps.Released_BackgroundColor_2 }}" />
         
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
@@ -22,10 +22,15 @@
         <hmi:action id="onMouseUp" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
         </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
     </defs>
 
-    <path d="M100,729.988A9.989,9.989,0,1,1,109.989,720,9.989,9.989,0,0,1,100,729.988ZM100,716a4,4,0,1,0,4,4A4,4,0,0,0,100,716Z" 
-        transform="translate(-70 -690)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_1) }}" fill-rule="evenodd"/>
-    <path d="M100,710.01m30,5.7v8.571l-9.563,1.913a21.514,21.514,0,0,1-1.618,3.848l5.424,8.136-6.061,6.061-8.063-5.375a21.006,21.006,0,0,1-3.945,1.688L104.285,750H95.714l-1.889-9.443a20.991,20.991,0,0,1-3.945-1.688l-8.063,5.375-6.061-6.061,5.424-8.136a21.447,21.447,0,0,1-1.618-3.848L70,724.284v-8.571l9.586-1.918a21.437,21.437,0,0,1,1.618-3.808l-5.447-8.171,6.061-6.061,8.136,5.424a20.928,20.928,0,0,1,3.854-1.644L95.714,690h8.571l1.908,9.536a20.911,20.911,0,0,1,3.853,1.644l8.136-5.424,6.061,6.061-5.447,8.171a21.526,21.526,0,0,1,1.618,3.808Zm-30-11.725A16.01,16.01,0,1,0,116.01,720,16.01,16.01,0,0,0,100,703.988Z" 
-        transform="translate(-70 -690)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_2) }}" fill-rule="evenodd"/>
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <path d="M100,729.988A9.989,9.989,0,1,1,109.989,720,9.989,9.989,0,0,1,100,729.988ZM100,716a4,4,0,1,0,4,4A4,4,0,0,0,100,716Z" 
+            transform="translate(-70 -690)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_1) }}" fill-rule="evenodd"/>
+        <path d="M100,710.01m30,5.7v8.571l-9.563,1.913a21.514,21.514,0,0,1-1.618,3.848l5.424,8.136-6.061,6.061-8.063-5.375a21.006,21.006,0,0,1-3.945,1.688L104.285,750H95.714l-1.889-9.443a20.991,20.991,0,0,1-3.945-1.688l-8.063,5.375-6.061-6.061,5.424-8.136a21.447,21.447,0,0,1-1.618-3.848L70,724.284v-8.571l9.586-1.918a21.437,21.437,0,0,1,1.618-3.808l-5.447-8.171,6.061-6.061,8.136,5.424a20.928,20.928,0,0,1,3.854-1.644L95.714,690h8.571l1.908,9.536a20.911,20.911,0,0,1,3.853,1.644l8.136-5.424,6.061,6.061-5.447,8.171a21.526,21.526,0,0,1,1.618,3.808Zm-30-11.725A16.01,16.01,0,1,0,116.01,720,16.01,16.01,0,0,0,100,703.988Z" 
+            transform="translate(-70 -690)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor_2) }}" fill-rule="evenodd"/>
+    </g>
 </svg>

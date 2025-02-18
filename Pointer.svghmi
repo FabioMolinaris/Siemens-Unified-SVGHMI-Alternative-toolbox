@@ -11,7 +11,7 @@
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ ParamProps.OUT_ShowFocusVisual_UsedForPressedStatus ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
+        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
         
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
@@ -19,13 +19,18 @@
         <hmi:action id="onMouseUp" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
         </hmi:action>
+        <hmi:action id="onMouseLeave" condition="1" >
+	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="false" />
+        </hmi:action>
     </defs>
 
-    <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(18,156,64,0.65)"/>
-    <g transform="translate(4 4)" fill="none" stroke="#9bffbd" stroke-width="3" opacity="0.613">
-        <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
-        <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <circle cx="17.5" cy="17.5" r="17.5" fill="rgba(18,156,64,0.65)"/>
+        <g transform="translate(4 4)" fill="none" stroke="#9bffbd" stroke-width="3" opacity="0.613">
+            <circle cx="13.5" cy="13.5" r="13.5" stroke="none"/>
+            <circle cx="13.5" cy="13.5" r="12" fill="none"/>
+        </g>
+        <circle cx="10.5" cy="10.5" r="10.5" transform="translate(7 7)" 
+            hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"/>
     </g>
-    <circle cx="10.5" cy="10.5" r="10.5" transform="translate(7 7)" 
-        hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}"/>
 </svg>

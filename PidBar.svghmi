@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
+    xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
+    xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
+    preserveAspectRatio="xMidYMid slice">
+
+    <hmi:self type="widget" displayName="PID" name="pid" version="1.0.0" performanceClass="L">
+        <hmi:paramDef name="Setpoint" type="number" default="50" />
+        <hmi:paramDef name="ActualValue" type="number" default="50" />
+        <hmi:paramDef name="LimitMax" type="number" default="0" />
+        <hmi:paramDef name="LimitMin" type="number" default="100" />
+        <hmi:paramDef name="BackgroundColor" type="HmiColor" default="0xFF129C40" />
+        <hmi:paramDef name="PositiveColor" type="HmiColor" default="0xFFC70000" />
+        <hmi:paramDef name="NegativeColor" type="HmiColor" default="0xFF00CFCF" />
+    </hmi:self>
+
+    <defs>
+        <hmi:localDef name="Max" type="number" hmi-bind:value="{{ ParamProps.LimitMax = ParamProps.LimitMin ? ParamProps.LimitMax + 1 : ParamProps.LimitMax }}" />
+        <hmi:localDef name="Hot" type="boolean" hmi-bind:value="{{ ParamProps.Setpoint > ParamProps.ActualValue }}" />
+        <hmi:localDef name="BarColor" type="HmiColor" hmi-bind:value="{{ LocalProps.Hot ? ParamProps.PositiveColor : ParamProps.NegativeColor }}" />
+        <hmi:localDef name="SetpointPosition" type="number" hmi-bind:value="{{ ((ParamProps.Setpoint - ParamProps.LimitMin) / (LocalProps.Max - ParamProps.LimitMin)) * HmiProps.Width) }}" />
+        <hmi:localDef name="BarWidth" type="number" hmi-bind:value="{{ (((ParamProps.Setpoint - ParamProps.ActualValue) - ParamProps.LimitMin) / (LocalProps.Max - ParamProps.LimitMin)) * HmiProps.Width) }}" />
+        <hmi:localDef name="BarHeight" type="number" hmi-bind:value="{{ LocalProps.BarWidth > (HmiProps.Height * 0.9) ? (HmiProps.Height * 0.9) : LocalProps.BarWidth }}" />
+        <hmi:localDef name="LeftPosition" type="number" hmi-bind:value="{{ LocalProps.Hot ? LocalProps.SetpointPosition : LocalProps.SetpointPosition - LocalProps.BarWidth }}" />
+        <hmi:localDef name="TopPosition" type="number" hmi-bind:value="{{ (HmiProps.Height - LocalProps.BarHeight) / 2 }}" />
+    </defs>
+
+    <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
+        <rect hmi-bind:width="{ HmiProps.Width }" hmi-bind:height="{ HmiProps.Height }" ry="50%" 
+            hmi-bind:fill="{{ Converter.RGBA(ParamProps.BackgroundColor) }}"/>
+        <rect hmi-bind:width="{ LocalProps.BarWidth }" hmi-bind:height="{ LocalProps.BarHeight }" ry="45%" 
+            hmi-bind:x="{ LocalProps.LeftPosition }" hmi-bind:y="{ LocalProps.TopPosition }" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BarColor) }}"/>
+        <rect hmi-bind:width="{ LocalProps.BarWidth }" hmi-bind:height="{ LocalProps.BarHeight }" ry="45%" 
+            hmi-bind:x="{ LocalProps.LeftPosition }" y="5%" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BarColor) }}"/>
+  </g>
+</svg>

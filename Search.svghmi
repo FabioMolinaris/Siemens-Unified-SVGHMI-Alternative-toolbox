@@ -2,17 +2,13 @@
     xmlns:hmi-bind--xlink="http://svg.siemens.com/hmi/bind/xlink/" xmlns:hmi="http://svg.siemens.com/hmi/"
     xmlns:hmi-bind="http://svg.siemens.com/hmi/bind/" xmlns:hmi-element="http://svg.siemens.com/hmi/element/"
     xmlns:hmi-feature="http://svg.siemens.com/hmi/feature/" xmlns:hmi-event="http://svg.siemens.com/hmi/event/"
-    width="60" height="60" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice">
+    width="800px" height="800px" viewBox="0 -0.33 60.312 60.312" preserveAspectRatio="xMidYMid slice">
 
-    <hmi:self type="widget" displayName="Pointer" name="pointer" version="1.0.0" performanceClass="L">
+    <hmi:self type="widget" displayName="Search" name="search" version="1.0.0" performanceClass="L">
         <hmi:paramDef name="OUT_ShowFocusVisual_UsedForPressedStatus" type="boolean" default="false" />
-        <hmi:paramDef name="Pressed_BackgroundColor" type="HmiColor" default="0xFF9F4C4C" />
-        <hmi:paramDef name="Released_BackgroundColor" type="HmiColor" default="0xFF9F4C4C" />
     </hmi:self>
 
     <defs>
-        <hmi:localDef name="BackgroundColor" type="HmiColor" hmi-bind:value="{{ HmiProps.ShowFocusVisual ? ParamProps.Pressed_BackgroundColor : ParamProps.Released_BackgroundColor }}" />
-        
         <hmi:action id="onMouseDown" condition="1" >
 	        <hmi:setProperty name="HmiProps.ShowFocusVisual" type="boolean" value="true" />
         </hmi:action>
@@ -25,7 +21,9 @@
     </defs>
 
     <g hmi-event:down="url(#onMouseDown)" hmi-event:up="url(#onMouseUp)" hmi-event:mouseLeave="url(#onMouseLeave)">
-        <path d="M100,390a30,30,0,1,1,30-30A30,30,0,0,1,100,390Zm18-30a4,4,0,0,1-4,4H86a4,4,0,0,1,0-8h28A4,4,0,0,1,118,360Z" 
-            transform="translate(-70 -330)" hmi-bind:fill="{{ Converter.RGBA(LocalProps.BackgroundColor) }}" fill-rule="evenodd"/>
+        <path fill="#65727f" fill-rule="evenodd" transform="translate(-629.688 -930)"
+            d="M647.4,963.751l8.2,8.2-17.074,17.1a2.05,2.05,0,0,1-2.9,0l-5.327-5.31a2.05,2.05,0,0,1,0-2.9Z" />
+        <path fill="#699f4c" fill-rule="evenodd" transform="translate(-629.688 -930)"
+            d="M670,930a20,20,0,1,1-20,20A20,20,0,0,1,670,930Zm0,6a14,14,0,1,1-14,14A14,14,0,0,1,670,936Z" />
     </g>
 </svg>
